@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  task_app_api:
+    build:
+      context: ../../task-app-api
+    container_name: k8s_task_app_api
+    restart: unless-stopped
+    depends_on:
+      - task_app_db
+    environment:
+      - MONGO_DB_URL=mongodb://task_app_db:27017/task-app
+    ports:
+      - 5000:5000
+
+  task_app_db:
+    image: mongo
+    container_name: k8s_task_app_db
+    restart: unless-stopped
+
+  task_app_express:
+    image: mongo-express
+    container_name: k8s_task_app_db_ui    
+    restart: unless-stopped
+    depends_on:
+      - task_app_db
+    environment:
+      ME_CONFIG_MONGODB_SERVER: task_app_db
+    ports:
+      - 8081:8081
