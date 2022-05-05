@@ -7,6 +7,7 @@ import * as taskService from '../services/taskService.js';
  */
 export const addTask = async (req, res) => {
     try {
+        console.log(req.body);
         const task = await taskService.addTask(req.body);
         res.send(task);
     } catch (error) {
