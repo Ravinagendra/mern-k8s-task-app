@@ -29,3 +29,5 @@ GET /api/tasks
 ### Misc
 
 -   Use `"proxy": "http://host.docker.internal:5000"` in ui package.json if you dont use nginx
+-   Create ssl `openssl req -x509 -days 10 -nodes -newkey rsa:2048 -keyout self.key -out self.crt`
+-   Create dhparam `openssl dhparam -out dhparam.pem 4096`
