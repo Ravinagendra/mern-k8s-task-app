@@ -8,10 +8,6 @@
 -   run api `npm run dev` in `/task-app-api`
 -   run ui `npm start` in `/task-app-ui`
 
-### Prod
-
--   run `docker-compose up -d --build`
-
 ## URLS
 
 -   UI: localhost
@@ -26,8 +22,7 @@ POST /api/tasks
 GET /api/tasks
 ```
 
-### Misc
+### Orchestration
 
--   Use `"proxy": "http://host.docker.internal:5000"` in ui package.json if you dont use nginx
--   Create ssl `openssl req -x509 -days 10 -nodes -newkey rsa:2048 -keyout self.key -out self.crt`
--   Create dhparam `openssl dhparam -out dhparam.pem 4096`
+-   For deployment using `docker-compode` read `Readme.md` in `orchestration/docker`
+-   For deployment using `kubernetes` read `Readme.md` in `orchestration/k8s`

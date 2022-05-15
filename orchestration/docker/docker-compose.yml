@@ -33,7 +33,8 @@ services:
     depends_on:
       - task_app_db
     environment:
-      - MONGO_DB_URL=mongodb://task_app_db:27017/task-app
+      - MONGO_DB_URL=task_app_db:27017
+      - App_DB=task-app
     # ports:
     #   - 5000:5000
 

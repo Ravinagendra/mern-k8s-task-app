@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: task-app-api-deployment
+    labels:
+        app: task-app-api
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: task-app-api
+    template:
+        metadata:
+            name: task-app-api
+            labels:
+                app: task-app-api
+        spec:
+            containers:
+                - name: task-app-api
+                  image: task-app-api
+                  imagePullPolicy: IfNotPresent # to work with local images
+                  ports:
+                      - containerPort: 5000
+                  env:
+                      - name: MONGO_DB_URL
+                        valueFrom:
+                            configMapKeyRef:
+                                name: task-app-api-configmap
+                                key: database_url
+                      - name: App_DB
+                        valueFrom:
+                            configMapKeyRef:
+                                name: task-app-api-configmap
+                                key: app_db
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: task-app-api-service
+spec:
+    selector:
+        app: task-app-api
+    #type: NodePort
+    ports:
+        - protocol: TCP
+          port: 5000
+          targetPort: 5000
+          #nodePort: 30001

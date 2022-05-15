@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: task-app-api-configmap
+data:
+    database_url: task-app-mongodb-service # mapped service from task-app-mongo-deployment file
+    app_db: task-app

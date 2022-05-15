@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: task-app-ui-deployment
+    labels:
+        app: task-app-ui
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: task-app-ui
+    template:
+        metadata:
+            name: task-app-ui
+            labels:
+                app: task-app-ui
+        spec:
+            containers:
+                - name: task-app-ui
+                  image: task-app-ui
+                  imagePullPolicy: IfNotPresent # to work with local images
+                  ports:
+                      - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: task-app-ui-service
+spec:
+    selector:
+        app: task-app-ui
+    #type: NodePort
+    ports:
+        - protocol: TCP
+          port: 3000
+          targetPort: 3000
+          #nodePort: 30002
