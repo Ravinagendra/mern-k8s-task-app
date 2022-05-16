@@ -14,6 +14,8 @@ openssl dhparam -out dhparam.pem 4096
 ### Deploy
 
 ```sh
+cd /orchestration/docker
+
 docker-compose up -d --build
 
 # Verify

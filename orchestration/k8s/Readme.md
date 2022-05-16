@@ -5,9 +5,18 @@
 -   Make sure you have installed ingress contoller for ingress-mapping to work
 -   Go to link https://kubernetes.github.io/ingress-nginx/deploy/ Run the command to configure ingress controller.
 
+```sh
+# Verify
+kubectl get ns
+
+kubectl get all -n ingress-nginx
+```
+
 ### SSL
 
 ```sh
+cd /orchestration/k8s
+
 # Generate a ssl certs
 openssl req -x509 -days 10 -nodes -newkey rsa:2048 -keyout ./ssl/self.key -out ./ssl/self.crt
 
@@ -21,6 +30,8 @@ kubectl describe secret ssl-cert
 ### Deploy
 
 ```sh
+cd /orchestration/k8s
+
 kubectl apply -f templates/ --recursive
 
 # Info
@@ -56,10 +67,11 @@ exit
 # Cleanup
 kubectl delete -f templates/ --recursive
 kubectl delete secret ssl-cert
+kubectl delete ns ingress-nginx
 ```
 
 ### URLS
 
 -   UI: https://localhost
 -   API: https://localhost/api/tasks
--   MongoExpress: https://localhost/express
+-   MongoExpress: https://localhost/mongo-express

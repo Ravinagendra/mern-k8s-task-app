@@ -3,7 +3,8 @@ kind: Ingress
 metadata:
     name: task-app-ingress-ui
     annotations:
-        nginx.ingress.kubernetes.io/rewrite-target: /
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+        nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
 spec:
     ingressClassName: nginx
     tls:
@@ -25,8 +26,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
     name: task-app-ingress-api
-    # annotations:
-    #     nginx.ingress.kubernetes.io/rewrite-target: /api
+    annotations:
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+        nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
 spec:
     ingressClassName: nginx
     tls:
@@ -50,6 +52,8 @@ metadata:
     name: task-app-ingress-mongo-express
     annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /
+        nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+        nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
 spec:
     ingressClassName: nginx
     tls:
@@ -59,7 +63,7 @@ spec:
     rules:
         - http:
               paths:
-                  - path: /express
+                  - path: /mongo-express
                     pathType: Prefix
                     backend:
                         service:
